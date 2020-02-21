@@ -13,7 +13,7 @@ public class largestprime{
                 break;
             }
         } 
-        System.out.println("Largest n which is prime as well as less than 15000 is "+n);
+        System.out.println("Largest n  prime number that is  less than 15000 is "+n);
         
         }
 }
