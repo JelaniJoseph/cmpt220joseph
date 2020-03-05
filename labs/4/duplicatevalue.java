@@ -27,7 +27,7 @@ public class duplicatevalue{
                 if(array[i]==array[j] && i!=j){
                     int k=j;
                     //deletes duplicate
-                    while(array[k]!=-1){
+                    while(array[k]!=-1){ // JA: This goes into an infinite loop
                         array[k]=array[++k];
                         //updates array
                         array[k-1]=-1;
