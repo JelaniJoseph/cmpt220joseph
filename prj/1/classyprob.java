@@ -1,7 +1,6 @@
 import java.util.Scanner;
 import java.util.Arrays;
 
-
 public class classyprob{
     public static String storeentry(String [] split2){
         String numrank = "";
