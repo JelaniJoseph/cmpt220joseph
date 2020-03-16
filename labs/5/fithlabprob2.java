@@ -17,7 +17,7 @@ public class fithlabprob2{
         for (int i = 0; i < len; i++){
             sqDiff += (x[i] - mean) * (x[i] - mean);
         }
-        return Math.sqrt(sqDiff / len);
+        return Math.sqrt(sqDiff / (len - 1));
         
     }
     public static void main(String[] args){
