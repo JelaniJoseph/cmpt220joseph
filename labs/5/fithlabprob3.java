@@ -21,7 +21,7 @@ public class fithlabprob3{
 
         //prints the array for user to see
         for (String e: students) {
-			System.out.println(e);
+			System.out.println(e); // JA: You should print the scores also
 		}
     }
 
