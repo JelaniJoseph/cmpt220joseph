@@ -22,8 +22,8 @@ public class loan {
         }
         // price equation that should go through the formula and give the result to the user
         double getPrice(){
-            return coupon * (1 - ( 1. / (Math.pow(1 + interest, payments)))
-             + valueMaturity * (1./(Math.pow(1+interest, payments))) );
+            return (coupon * (1 - (1 / Math.pow(1 + interest, payments)))) +
+            (valueMaturity * (1 / Math.pow(1 + interest, payments)));
         }
     }
 
