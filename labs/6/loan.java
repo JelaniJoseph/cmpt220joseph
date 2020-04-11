@@ -1,5 +1,5 @@
 import java.lang.Math;
-public class loan {
+public class loan { // JA: it should always be uppercase
     public static class Bond{
         //specifications of the financial bond 
         public double coupon;
