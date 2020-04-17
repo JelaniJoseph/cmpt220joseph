@@ -19,6 +19,7 @@ public class cardnum2 {
 			}
 			
 		}
+			// JA: Not the most efficient way
 			Card aceOfClubs = new Card(1, 0);
 			Card twoOfClubs = new Card(2, 0);
 			Card threeOfClubs = new Card(3, 0);
