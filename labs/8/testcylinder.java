@@ -1,3 +1,4 @@
+// JA: Remember that classes are capitalized. Where is main?
 public class testcylinder {
     public static class Circle{
         //attributes
