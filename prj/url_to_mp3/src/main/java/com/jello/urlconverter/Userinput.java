@@ -38,17 +38,10 @@ public class Userinput {
                 encoder.setEncodedurl(url1);
                 encoder.encode();
                 tube.setFinalurl(encoder.getTubeurl());
-                System.out.println(tube.getFinalurl());
+                tube.Download();
+                tube.urlFormation();
 //                tube.setYoutubeurl(url1);
 
-                // new Thread(new tube.Download(url1, out)).start();
-
-            } else if (url1.contains("soundcloud")){
-                // class instansiations
-                Soundcloudconvert sound = new Soundcloudconvert();
-                System.out.println("sending to soundcloud class");
-                sound.setSoundurl(url1);
-                sound.download(url1);
             }else{
                 System.out.println("This is not a soundcloud/youtube link, exiting program.");
                 System.exit(0);
