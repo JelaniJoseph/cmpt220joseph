@@ -1,8 +1,4 @@
 package com.jello.urlconverter;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import org.json.simple.JSONObject;
 
 import javax.print.DocFlavor;
 import java.io.BufferedReader;
@@ -12,27 +8,46 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Scanner;
 
 
 public class Youtubeconvert {
     String link;
     String finalurl;
+    String uuid;
+    String formated;
 
-    public void setYoutubeurl(String url) {
-        this.link = url;
-    }
+    //getters for all methods
     public String getYoutubeurl() {
         return this.link;
     }
-
-    public void setFinalurl(String finalurl) {
-        this.finalurl = finalurl;
-    }
-
     public String getFinalurl(){
         return this.finalurl;
     }
+    public String getFormated(){
+        return this.formated;
+    }
+    public String getUuid(){
+        return this.uuid;
+    }
 
+    //setters for all methods
+    public void setYoutubeurl(String url) {
+        this.link = url;
+    }
+    public void setFinalurl(String finalurl) {
+        this.finalurl = finalurl;
+    }
+    public void setUuid(String uuid){
+        this.uuid = uuid;
+    }
+    public void setFormated(String formated){
+        this.formated = formated;
+    }
+
+    // Main method for getting uuid and verifying site again
     public void Download() throws IOException {
 
        try{
@@ -51,7 +66,12 @@ public class Youtubeconvert {
                    response.append(inputLine);
                }
                in.close();
-               System.out.println("Reached");
+               String strresponse = response.toString();
+               // saves data to an array list string type and takes out the uuid for the link
+               ArrayList<String> list= new ArrayList<String>(Arrays.asList(strresponse.split(",")));
+               String x = list.get(1);
+               String identifier = x.substring(5, x.length() - 1);
+               this.uuid = identifier;
            } else{
                System.out.println("failed!");
            }
@@ -59,6 +79,25 @@ public class Youtubeconvert {
            System.out.println(e.getMessage());
        }
     }
+    //method to create last url for testing
+    public void urlFormation(){
+        System.out.println("Please copy and paste the entire youtube video title here: ");
+        String in = new Scanner(System.in).nextLine();
+        //differnt servers downloads can be avaidble on
+        String serv1 = "https://s1.loader.to/downloads2/";
+        String serv2 = "https://s2.loader.to/downloads2/";
+        String serv3 = "https://s3.loader.to/downloads2/";
+        String serv4 = "https://s4.loader.to/downloads2/";
+        String serv5 = "https://s5.loader.to/downloads2/";
+
+        this.formated = ("https://s4.loader.to/downloads2/" + this.uuid + "/" + in + ".mp3");
+        System.out.println(this.getFormated());
+    }
+
+
+
+
+
 
 
 
