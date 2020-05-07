@@ -1,13 +1,14 @@
 package com.jello.urlconverter;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 import javax.print.DocFlavor;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.net.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -83,15 +84,13 @@ public class Youtubeconvert {
     public void urlFormation(){
         System.out.println("Please copy and paste the entire youtube video title here: ");
         String in = new Scanner(System.in).nextLine();
-        //differnt servers downloads can be avaidble on
-        String serv1 = "https://s1.loader.to/downloads2/";
-        String serv2 = "https://s2.loader.to/downloads2/";
-        String serv3 = "https://s3.loader.to/downloads2/";
-        String serv4 = "https://s4.loader.to/downloads2/";
-        String serv5 = "https://s5.loader.to/downloads2/";
+        String x = in;
+        String specialchar = StringEscapeUtils.escapeHtml4(x);
+        String encodedtitle = URLEncoder.encode(specialchar, StandardCharsets.UTF_8)
+                .replace("+", "%20").replace("『", "%E3%80%8");
+        this.formated = ("https://s1.loader.to/downloads2/" + this.uuid + "/" + encodedtitle + ".mp3");
+//        System.out.println(this.getFormated());
 
-        this.formated = ("https://s4.loader.to/downloads2/" + this.uuid + "/" + in + ".mp3");
-        System.out.println(this.getFormated());
     }
 
 

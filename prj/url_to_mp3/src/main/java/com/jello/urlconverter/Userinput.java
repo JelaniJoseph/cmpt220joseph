@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
+import java.util.concurrent.TimeoutException;
 
 
 public class Userinput {
@@ -40,7 +41,10 @@ public class Userinput {
                 tube.setFinalurl(encoder.getTubeurl());
                 tube.Download();
                 tube.urlFormation();
-//                tube.setYoutubeurl(url1);
+                Output output = new Output();
+                output.setProcessing(tube.getFormated());
+                output.finalStep();
+//
 
             }else{
                 System.out.println("This is not a soundcloud/youtube link, exiting program.");
