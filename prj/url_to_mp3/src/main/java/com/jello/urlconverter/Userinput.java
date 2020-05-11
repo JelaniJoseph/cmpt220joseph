@@ -29,7 +29,7 @@ public class Userinput {
         System.out.println("Please enter a URL: ");
         String url1 = new Scanner(System.in).next();
 
-        // series of if statements to check if links is valid & a youtube or soundcloud link
+        // series of if statements to check if links is valid & a youtube  link
         if (isValid(url1)){
             System.out.println("This url is valid! continuing...");
             Encoder encoder = new Encoder();
@@ -43,11 +43,13 @@ public class Userinput {
                 tube.urlFormation();
                 Output output = new Output();
                 output.setProcessing(tube.getFormated());
+                File out = new File("C:\\Users\\Jelani\\Desktop\\ test.mp3");
+                output.setDestination(out);
                 output.finalStep();
 //
 
             }else{
-                System.out.println("This is not a soundcloud/youtube link, exiting program.");
+                System.out.println("This is not a youtube link, exiting program.");
                 System.exit(0);
             }
 

@@ -8,10 +8,14 @@ import java.io.InputStreamReader;
 import java.net.*;
 import java.io.File;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
+import static java.nio.charset.StandardCharsets.ISO_8859_1;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 
 public class Youtubeconvert {
@@ -87,9 +91,12 @@ public class Youtubeconvert {
         String x = in;
         String specialchar = StringEscapeUtils.escapeHtml4(x);
         String encodedtitle = URLEncoder.encode(specialchar, StandardCharsets.UTF_8)
-                .replace("+", "%20").replace("『", "%E3%80%8");
+                .replace("+", "%20").replace("『", "%E3%80%8")
+//                .replace("%28", "(").replace("%29", ")")
+                .replace("%7C", "_").replace("%5B", "[")
+                .replace("%5D", "]");
+
         this.formated = ("https://s1.loader.to/downloads2/" + this.uuid + "/" + encodedtitle + ".mp3");
-//        System.out.println(this.getFormated());
 
     }
 
