@@ -89,14 +89,15 @@ public class Youtubeconvert {
         System.out.println("Please copy and paste the entire youtube video title here: ");
         String in = new Scanner(System.in).nextLine();
         String x = in;
-        String specialchar = StringEscapeUtils.escapeHtml4(x);
+        String specialchar = StringEscapeUtils.unescapeHtml4(x);
         String encodedtitle = URLEncoder.encode(specialchar, StandardCharsets.UTF_8)
                 .replace("+", "%20").replace("『", "%E3%80%8")
-//                .replace("%28", "(").replace("%29", ")")
+                .replace("%28", "(").replace("%29", ")")
                 .replace("%7C", "_").replace("%5B", "[")
                 .replace("%5D", "]");
 
         this.formated = ("https://s1.loader.to/downloads2/" + this.uuid + "/" + encodedtitle + ".mp3");
+
 
     }
 

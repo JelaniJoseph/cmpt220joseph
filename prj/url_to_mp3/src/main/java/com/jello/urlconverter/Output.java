@@ -42,6 +42,7 @@ public class Output {
 
         while(condition == true){
             URL youtubelink = new URL(this.processing);
+            System.out.println(youtubelink);
             HttpURLConnection conn = (HttpURLConnection)youtubelink.openConnection();
             conn.setRequestMethod("GET");
             int responseCode = conn.getResponseCode();
