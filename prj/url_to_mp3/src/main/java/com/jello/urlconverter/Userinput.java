@@ -28,24 +28,21 @@ public class Userinput {
     public static void main(String[] args) throws IOException {
         System.out.println("Please enter a URL: ");
         String url1 = new Scanner(System.in).next();
-
         // series of if statements to check if links is valid & a youtube  link
         if (isValid(url1)){
             System.out.println("This url is valid! continuing...");
-            Encoder encoder = new Encoder();
             if (url1.contains("youtube")){
-                Youtubeconvert tube = new Youtubeconvert();
+                URL linktest = new URL(url1);
+                YoutubeScrapper youtubescrapper = new YoutubeScrapper();
                 System.out.println("sending to youtube class");
-                encoder.setEncodedurl(url1);
-                encoder.encode();
-                tube.setFinalurl(encoder.getTubeurl());
-                tube.Download();
-                tube.urlFormation();
+                youtubescrapper.setLinktoscrape(linktest);
+                System.out.println(youtubescrapper.linktoscrape);
+                youtubescrapper.tubeScrape();
                 Output output = new Output();
-                output.setProcessing(tube.getFormated());
+                output.setProcessing(youtubescrapper.getYoutubelink());
                 File out = new File("C:\\Users\\Jelani\\Desktop\\ test.mp3");
                 output.setDestination(out);
-                output.finalStep();
+                output.youtubeDesktop();
 //
 
             }else{
