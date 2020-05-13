@@ -32,7 +32,7 @@ public class Output {
     }
 
 
-    public void youtubeDesktop() throws IOException{
+    public void downloadDesktop() throws IOException{
         URL youtubelink = new URL(this.processing);
         HttpURLConnection conn = (HttpURLConnection)youtubelink.openConnection();
         conn.setRequestMethod("GET");

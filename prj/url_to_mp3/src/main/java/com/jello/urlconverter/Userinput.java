@@ -32,20 +32,31 @@ public class Userinput {
         if (isValid(url1)){
             System.out.println("This url is valid! continuing...");
             if (url1.contains("youtube")){
-                URL linktest = new URL(url1);
+                URL tubeurl = new URL(url1);
                 YoutubeScrapper youtubescrapper = new YoutubeScrapper();
                 System.out.println("sending to youtube class");
-                youtubescrapper.setLinktoscrape(linktest);
-                System.out.println(youtubescrapper.linktoscrape);
+                youtubescrapper.setLinktoscrape(tubeurl);
                 youtubescrapper.tubeScrape();
                 Output output = new Output();
                 output.setProcessing(youtubescrapper.getYoutubelink());
                 File out = new File("C:\\Users\\Jelani\\Desktop\\ test.mp3");
                 output.setDestination(out);
-                output.youtubeDesktop();
+                output.downloadDesktop();
 //
 
-            }else{
+            }else if (url1.contains("soundcloud")){
+                URL cloudurl = new URL(url1);
+                Soundcloudscrapper soundcloudscrapper = new Soundcloudscrapper();
+                System.out.println("Sending to soundcloud class...");
+                soundcloudscrapper.setSoundscrape(cloudurl);
+                soundcloudscrapper.soundScrape();
+                Output output = new Output();
+                output.setProcessing(soundcloudscrapper.getClouddownload());
+                File out = new File("C:\\Users\\Jelani\\Desktop\\ cloud.mp3");
+                output.setDestination(out);
+                output.downloadDesktop();
+
+            } else{
                 System.out.println("This is not a youtube link, exiting program.");
                 System.exit(0);
             }
