@@ -1,56 +1,56 @@
 package com.jello.urlconverter;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Scanner;
-import java.util.concurrent.TimeoutException;
-
 
 public class Userinput {
     String youtube_url;
     String soundcloud_url;
 
-    //Returns true if url is valid
-    public static boolean isValid(String url){
-        /* Try creating a valid URL */
+    public Userinput() {
+    }
+
+    public static boolean isValid(String url) {
         try {
-            new URL(url).toURI();
+            (new URL(url)).toURI();
             return true;
-        }
-        // If there was an Exception
-        // while creating URL object
-        catch (Exception e) {
+        } catch (Exception var2) {
             return false;
         }
     }
 
     public static void main(String[] args) throws IOException {
         System.out.println("Please enter a URL: ");
-        String url1 = new Scanner(System.in).next();
-
-        // series of if statements to check if links is valid & a youtube or soundcloud link
-        if (isValid(url1)){
+        String url1 = (new Scanner(System.in)).next();
+        if (isValid(url1)) {
             System.out.println("This url is valid! continuing...");
-            Encoder encoder = new Encoder();
-            if (url1.contains("youtube")){
-                Youtubeconvert tube = new Youtubeconvert();
+            URL cloudurl;
+            Output output;
+            if (url1.contains("youtube")) {
+                cloudurl = new URL(url1);
+                YoutubeScrapper youtubescrapper = new YoutubeScrapper();
                 System.out.println("sending to youtube class");
-                encoder.setEncodedurl(url1);
-                encoder.encode();
-                tube.setFinalurl(encoder.getTubeurl());
-                tube.Download();
-                tube.urlFormation();
-                Output output = new Output();
-                output.setProcessing(tube.getFormated());
-                output.finalStep();
-//
-
-            }else{
-                System.out.println("This is not a soundcloud/youtube link, exiting program.");
+                youtubescrapper.setLinktoscrape(cloudurl);
+                youtubescrapper.tubeScrape();
+                output = new Output();
+                output.fileSelection();
+                output.setProcessing(youtubescrapper.getYoutubelink());
+                output.downloadDesktop();
+            } else if (url1.contains("soundcloud")) {
+                cloudurl = new URL(url1);
+                Soundcloudscrapper soundcloudscrapper = new Soundcloudscrapper();
+                System.out.println("Sending to soundcloud class...");
+                soundcloudscrapper.setSoundscrape(cloudurl);
+                soundcloudscrapper.soundScrape();
+                output = new Output();
+                output.fileSelection();
+                output.setProcessing(soundcloudscrapper.getClouddownload());
+                output.downloadDesktop();
+            } else {
+                System.out.println("This is not a youtube link, exiting program.");
                 System.exit(0);
             }
-
         } else {
             System.out.println("Invalid url!... exiting program ");
             System.exit(0);
