@@ -18,6 +18,7 @@ public class prob2 {
         }
         
         try (
+        // JA: You have to read the input file before opening for writing
         Scanner in = new Scanner(f);
         PrintWriter output = new PrintWriter(f);
         ) {
