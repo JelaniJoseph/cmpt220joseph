@@ -1,7 +1,10 @@
 package com.jello.urlconverter;
 
+import org.apache.log4j.BasicConfigurator;
+import org.asynchttpclient.*;
 import org.junit.rules.Timeout;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.*;
 import java.util.Scanner;
@@ -42,7 +45,7 @@ public class Output {
             String finalpath = "C:\\Users\\" + pathbuild + "\\Desktop\\";
             File file = new File(finalpath + filename + ".mp3");
             System.out.println("path=" + file.getAbsolutePath());
-            file.createNewFile();
+//            file.createNewFile();
             System.out.println("File created");
             this.destination = file;
         } catch (Exception e) {
@@ -61,7 +64,7 @@ public class Output {
         // if website is reached save data to mp3 file and output
         if(responseCode == HttpURLConnection.HTTP_OK) {
             URL finallink = new URL(this.processing);
-            HttpURLConnection connect = (HttpURLConnection)finallink.openConnection();
+            HttpsURLConnection connect = (HttpsURLConnection) finallink.openConnection();
             double filesize = (double)connect.getContentLengthLong();
             BufferedInputStream in = new BufferedInputStream(connect.getInputStream());
             FileOutputStream filehere = new FileOutputStream(this.destination);
@@ -90,5 +93,33 @@ public class Output {
 
 
     }
+    public void soundDesktop() throws IOException {
+        fileSelection();
+        BasicConfigurator.configure();
+        String FILE_URL= this.processing;
+        String test = FILE_URL.substring(1, FILE_URL.length()-1);
+        AsyncHttpClient client = Dsl.asyncHttpClient();
+        final FileOutputStream stream = new FileOutputStream(this.destination);
+        client.prepareGet(test).execute(new AsyncCompletionHandler<FileOutputStream>() {
+
+            @Override
+            public State onBodyPartReceived(HttpResponseBodyPart bodyPart)
+                    throws Exception {
+                // if the call is successful aka 200 resp, the n start the stream
+                stream.getChannel().write(bodyPart.getBodyByteBuffer());
+                return State.CONTINUE;
+            }
+
+            // keeps going until stream is closed
+            @Override
+            public FileOutputStream onCompleted(Response response)
+                    throws Exception {
+                return stream;
+            }
+
+        });
+        System.out.println("Download Complete");
+    }
+
 
 }
