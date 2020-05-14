@@ -44,9 +44,8 @@ public class Userinput {
                 soundcloudscrapper.setSoundscrape(cloudurl);
                 soundcloudscrapper.soundScrape();
                 output = new Output();
-                output.fileSelection();
                 output.setProcessing(soundcloudscrapper.getClouddownload());
-                output.downloadDesktop();
+                output.soundDesktop();
             } else {
                 System.out.println("This is not a youtube link, exiting program.");
                 System.exit(0);
